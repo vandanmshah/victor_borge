@@ -1,4 +1,4 @@
-import ast
+import ast, re
 def hasNumbers(inputString):
 	return any(char.isdigit() for char in inputString)
 def load_inflate():
@@ -32,6 +32,7 @@ flag = True
 while flag:
 	statement = raw_input("\n(Note :- If you want to 'EXIT' simply write 'E')\nEnter your statement :- ")
 	stmttoprint = ""
+	specialchar = ""
 	if statement == "E" or statement == "e":
 		flag = False
 	else:
@@ -40,15 +41,18 @@ while flag:
 		for key, value in values.items():
 			values_to_check.append(key)
 		for stmt in statement.split(' '):
+			if str(re.search( r'\W', stmt)) != "None":
+				specialchar = stmt[len(stmt)-1]
+				stmt = stmt[:-1]
 			if hasNumbers(stmt):
-				stmttoprint += str(ast.literal_eval(stmt) + 1) + " "
+				stmttoprint += str(ast.literal_eval(stmt) + 1) + specialchar + " "
 			else:
 				flg = True
 				for chkvalue in values_to_check:
 					if chkvalue in (stmt.lower()):
 						flg = False
-						stmttoprint += stmt.lower().replace(chkvalue, values[chkvalue]) + " "
+						stmttoprint += stmt.lower().replace(chkvalue, values[chkvalue]) + specialchar + " "
 						break
 				if flg:
-					stmttoprint += stmt + " "
+					stmttoprint += stmt + specialchar + " "
 	print "Your inflated sentence is: " + stmttoprint
