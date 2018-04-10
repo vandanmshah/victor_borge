@@ -30,7 +30,7 @@ def load_inflate():
 
 flag = True
 while flag:
-	statement = raw_input("\n(Note :- If you want to 'EXIT' simply write 'E')\nEnter your statement :- ")
+	statement = raw_input("\n(Note :- If you want to 'EXIT' simply write 'E')\nEnter your sentence to inflate: ")
 	stmttoprint = ""
 	specialchar = ""
 	if statement == "E" or statement == "e":
